@@ -58,9 +58,28 @@
     중간언어로 JSON을 사용한다.
     ex) 자바 <--> 파이썬 object 전달 용이하게 하기 위해 JSON 사용함. 
     JSON 데이터를 요청/응답할 때 JSON데이터를 JAVA오브젝트로 바꿔줌
+
+    유니코드 : utf-8 ( 3byte )
+
+    InputSteam : 바이트를 받음 -> 따로 처리해야함
+    InputStreamReader : 배열로 여러개 문자 받을 수 있으나 배열의 경우 크기를 정해야 함
+    BufferedReader : 가변길이의 문자를 받을 수 있음
+    PrintWriter : BufferedWriter랑 똑같은데 print()와 println() 둘 다 제공
+
+    request.getReader() // BufferedReader로 처리해줌
+    
+    스프링에서:
+    @ResponseBody // BufferedWriter 작동
+    @RequestBody // BufferedReader 작동
+
+### JPA (Java Persistence Application programming interface)
+    영속성(Persistence) Api이다
+    RAM - 휘발성 데이터
+    HDD(File system) - 비휘발성
+    DBMS(DataBase Management System)이 하드디스크에서 데이터 관리함
     
 
-## 부정합
+### 부정합
     A가 데이터를 SELECT(10000)하여 10초가 걸리는 연산을 한다.
     B가 10000을 20000으로 업데이트한다.
     A의 연산 중 중간에 다시 SELECT(20000)한다. -> 부정합
