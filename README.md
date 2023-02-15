@@ -77,6 +77,11 @@
     RAM - 휘발성 데이터
     HDD(File system) - 비휘발성
     DBMS(DataBase Management System)이 하드디스크에서 데이터 관리함
+
+    ORM (Object-Realational-Mapping)
+
+### HTTP
+    Socket: 운영체제가 가지고 있는 것
     
 
 ### 부정합

@@ -1,7 +1,13 @@
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+
 spring:
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         format_sql: true
