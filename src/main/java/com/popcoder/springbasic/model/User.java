@@ -24,7 +24,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 프로젝트에 연결된 DB의 전략을 따라가겠다
     private Long id;
 
-    @Column(nullable = false, length = 30) // length default = 255
+    @Column(nullable = false, length = 30, unique = true) // length default = 255
     private String username;
 
     @Column(nullable = false, length = 100) // 해쉬로 암호화된 패스워드를 넣을것이기 때문에 넉넉하게 잡는게 좋음

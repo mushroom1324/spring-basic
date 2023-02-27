@@ -5,6 +5,7 @@ import com.popcoder.springbasic.model.RoleType;
 import com.popcoder.springbasic.model.User;
 import com.popcoder.springbasic.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -21,11 +22,21 @@ public class DummyControllerTest {
     @Autowired // DI(Dependency Injection)
     private UserRepository userRepository;
 
+    @DeleteMapping("/dummy/user/{id}")
+    public String deleteUser(@PathVariable Long id) {
+        try {
+            userRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            return "Cannot find user with id: " + id + "\n" + e.getMessage();
+        }
+
+        return "User deleted with id: " + id;
+    }
 
     // save 함수는 아이디를 전달하지 않으면 insert
     // 아이디를 전달하고 아이디에 대한 데이터가 있으면 update
     // 아이디를 전달하고 아이디에 대한 데이터가 없으면 insert
-    @Transactional
+    @Transactional // 함수 종료시 자동으로 commit (변경을 감지해서 변경시 업데이트해줌 -> 더티체킹)
     @PutMapping("/dummy/user/{id}")
     public User updateUser(@PathVariable Long id, @RequestBody User requestUser) {
         // @RequestBody: JSON 데이터 요청 -> 자바 오브젝트로 바꿔줌(MessageConverter의 Jackson 라이브러리가 해줌)
@@ -42,7 +53,7 @@ public class DummyControllerTest {
         // userRepository.save(user);
 
         // 더티 체킹
-        return null;
+        return user;
     }
 
     @GetMapping("/dummy/users")
@@ -103,3 +114,4 @@ public class DummyControllerTest {
 
     }
 }
+

@@ -5,6 +5,11 @@ server:
       force: true
 
 spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+
   jpa:
     hibernate:
       ddl-auto: update
